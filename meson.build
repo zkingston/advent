@@ -21,7 +21,7 @@ c_args = [
 
 link_args = ['-fsanitize-recover=all']
 
-foreach year : [2021, 2022]
+foreach year : [2021, 2022, 2023]
   foreach day : range(26)
     ystr = year.to_string()
     dstr = day.to_string()
