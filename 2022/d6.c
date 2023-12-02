@@ -7,6 +7,8 @@ int main(void)
     const char *f;
     const uint32_t size = load(&f, INPUT_FILENAME);
 
+    clock_t begin = clock();
+
     uint16_t fi = 4;
     uint32_t set = B(0) ^ B(1) ^ B(2) ^ B(3);
     for (; fi < size && __builtin_popcount(set) != 4; ++fi)
@@ -16,6 +18,9 @@ int main(void)
     set = B(0) ^ B(1) ^ B(2) ^ B(3) ^ B(4) ^ B(5) ^ B(6) ^ B(7) ^ B(8) ^ B(9) ^ B(10) ^ B(11) ^ B(12) ^ B(13);
     for (; gi < size && __builtin_popcount(set) != 14; ++gi)
         set ^= B(gi) ^ B(gi - 14);
+
+    clock_t end = clock();
+    printf("%luns\n", end - begin);
 
     printf("%d\n%d\n", fi, gi);
 }

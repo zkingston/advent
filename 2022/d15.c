@@ -25,6 +25,7 @@ static inline void read_int(int32_t *v, char stop)
 int main(void)
 {
     const uint32_t size = load(&f, INPUT_FILENAME);
+    const clock_t begin = clock();
 
     struct Sensor sensors[UINT8_MAX] = {0};
     uint8_t n = 0;
@@ -91,6 +92,7 @@ int main(void)
             if (v)
             {
                 printf("%ld\n", MX * (int64_t)x + (int64_t)y);
+                printf("%luns\n", clock() - begin);
                 return 0;
             }
         }

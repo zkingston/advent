@@ -12,6 +12,7 @@ int main(void)
 {
     const char *f;
     const uint32_t size = load(&f, INPUT_FILENAME);
+    const clock_t begin = clock();
 
     uint16_t score1 = 0, score2 = 0;
     for (uint32_t i = 0; i < size; i += 4)
@@ -24,5 +25,6 @@ int main(void)
         score2 += scores[a][c] + c + 1;
     }
 
+    printf("%luns\n", clock() - begin);
     printf("%d\n%d\n", score1, score2);
 }

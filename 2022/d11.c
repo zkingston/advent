@@ -16,7 +16,7 @@ static inline int cmp(const uint64_t *p1, const uint64_t *p2)
 static uint8_t mi = 0;
 static uint64_t modulo = 1;
 
-static inline uint64_t simulate(struct Monkey *m, uint32_t n, uint8_t p1)
+static inline uint64_t simulate(struct Monkey *m, uint32_t n, bool p1)
 {
     uint64_t inspected[M] = {0};
     for (uint16_t t = 0; t < n; ++t)
@@ -38,6 +38,7 @@ int main(void)
 {
     const char *f;
     const uint32_t size = load(&f, INPUT_FILENAME);
+    const clock_t begin = clock();
 
     struct Monkey m[M] = {0}, n[M];
     for (uint32_t i = 0; i < size; ++mi)
@@ -80,5 +81,9 @@ int main(void)
     }
 
     memcpy(n, m, sizeof(struct Monkey) * mi);
-    printf("%lu\n%lu\n", simulate(m, 20, 1), simulate(n, 10000, 0));
+    const uint64_t a = simulate(m, 20, true);
+    const uint64_t b = simulate(n, 10000, false);
+
+    printf("%luns\n", clock() - begin);
+    printf("%lu\n%lu\n", a, b);
 }

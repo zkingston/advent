@@ -7,6 +7,7 @@ int main(void)
 {
     const char *f;
     const uint32_t size = load(&f, INPUT_FILENAME);
+    const clock_t begin = clock();
 
     uint8_t index = 0;
     uint16_t total = 0, total3 = 0;
@@ -33,5 +34,6 @@ int main(void)
             p = ++i;
         }
 
+    printf("%luns\n", clock() - begin);
     printf("%d\n%d\n", total, total3);
 }

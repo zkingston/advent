@@ -53,6 +53,7 @@ int main(void)
 {
     const char *f;
     n = load(&f, INPUT_FILENAME) - 1;
+    const clock_t begin = clock();
 
     for (uint16_t i = 0; i < n; ++i)
         moves[i] = f[i] == '>';
@@ -78,4 +79,5 @@ int main(void)
     }
 
     printf("%lu\n", ex + x - 1);
+    printf("%luns\n", clock() - begin);
 }

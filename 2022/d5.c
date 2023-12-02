@@ -9,6 +9,7 @@ int main(void)
 {
     const char *f;
     const uint32_t size = load(&f, INPUT_FILENAME);
+    const clock_t begin = clock();
 
     uint8_t grid1[IW][UINT8_MAX], grid2[IW][UINT8_MAX], x1[IW] = {0}, x2[IW] = {0};
     for (uint8_t k = 0; k < IH; ++k)
@@ -33,6 +34,8 @@ int main(void)
         memcpy(&grid2[to - 1][x2[to - 1] + 1], &grid2[from - 1][x2[from - 1] + 1], n);
         x2[to - 1] += n;
     }
+
+    printf("%luns\n", clock() - begin);
 
     for (uint8_t j = 0; j < IW; ++j)
         putchar(grid1[j][x1[j]]);

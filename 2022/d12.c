@@ -27,6 +27,7 @@ int main(void)
 {
     const char *f;
     load(&f, INPUT_FILENAME);
+    const clock_t begin = clock();
 
     uint8_t si = 0, sj = 0, a = 0;
     for (uint8_t i = 0; i < W; ++i)
@@ -61,6 +62,7 @@ int main(void)
         else if (n->i == si && n->j == sj)
         {
             printf("%d\n", n->d - 1);
+            printf("%luns\n", clock() - begin);
             return 0;
         }
 

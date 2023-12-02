@@ -10,6 +10,7 @@ int main(void)
 {
     const char *f;
     const uint32_t size = load(&f, INPUT_FILENAME);
+    const clock_t begin = clock();
 
     uint8_t visited2[W][H] = {0}, visitedN[W][H] = {0};
     visited2[STX][STY] = visitedN[STX][STY] = 1;
@@ -51,5 +52,6 @@ int main(void)
         }
     }
 
+    printf("%luns\n", clock() - begin);
     printf("%d\n%d\n", total2, totalN);
 }

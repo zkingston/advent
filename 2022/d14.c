@@ -7,6 +7,7 @@ int main(void)
 {
     const char *f;
     const uint32_t size = load(&f, INPUT_FILENAME);
+    const clock_t begin = clock();
 
     uint16_t px = 0, py = 0, my = 0;
     bool o[W][H] = {0};
@@ -66,6 +67,7 @@ int main(void)
                 if (x == 500 && y == 0)
                 {
                     printf("%d\n", n + 1);
+                    printf("%luns\n", clock() - begin);
                     return 0;
                 }
 

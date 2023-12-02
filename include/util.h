@@ -1,6 +1,7 @@
 #ifndef ADVENT
 #define ADVENT
 
+#include <time.h>
 #include <ctype.h>
 #include <fcntl.h>
 #include <limits.h>

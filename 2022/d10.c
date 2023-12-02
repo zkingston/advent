@@ -16,6 +16,7 @@ int main(void)
 {
     const char *f;
     const uint32_t size = load(&f, INPUT_FILENAME);
+    const clock_t begin = clock();
 
     for (uint32_t i = 0; i < size; ++i, ++cycle)
     {
@@ -45,5 +46,6 @@ int main(void)
         x += v;
     }
 
+    printf("\n%luns", clock() - begin);
     printf("\n%d\n", strength);
 }

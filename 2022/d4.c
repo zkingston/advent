@@ -4,6 +4,7 @@ int main(void)
 {
     const char *f;
     const uint32_t size = load(&f, INPUT_FILENAME);
+    const clock_t begin = clock();
 
     uint8_t j = 0, r[4] = {0};
     uint16_t ctotal = 0, ototal = 0;
@@ -25,5 +26,6 @@ int main(void)
             r[j] = r[j] * 10 + c - '0';
     }
 
+    printf("%luns\n", clock() - begin);
     printf("%d\n%d\n", ctotal, ototal);
 }

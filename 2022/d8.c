@@ -11,6 +11,7 @@ int main(void)
 {
     const char *f;
     load(&f, INPUT_FILENAME);
+    const clock_t begin = clock();
 
     struct Cell c[D + 2][D + 2] = {0}, df;
     memset(&df, 0xFF, sizeof(df));
@@ -74,5 +75,6 @@ int main(void)
             score = MAX(score, sl * sr * su * sd);
         }
 
+    printf("%luns\n", clock() - begin);
     printf("%d\n%d\n", visible, score);
 }

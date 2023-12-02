@@ -80,15 +80,13 @@ static inline int __compare_lists(struct List *a, uint8_t i, struct List *b, uin
 
 static inline int compare_lists(const uint16_t *i, const uint16_t *j)
 {
-    struct List at, bt;
-    memcpy(&at, &ls[*i], sizeof(struct List));
-    memcpy(&bt, &ls[*j], sizeof(struct List));
-    return __compare_lists(&at, 0, &bt, 0);
+    return __compare_lists(&ls[*i], 0, &ls[*j], 0);
 }
 
 int main(void)
 {
     const uint32_t size = load(&f, INPUT_FILENAME);
+    const clock_t begin = clock();
 
     struct List *p1 = &ls[0], *p2 = &ls[1];  // [[2]], [[6]]
     p1->l[0].l = 1, p1->l[0].e[0] = 1, p1->l[0].n = 1;
@@ -124,5 +122,6 @@ int main(void)
     for (uint16_t i = 0; i < 2 + (n - 1) * 2 && (!a || !b); ++i)
         a = (idx[i] == 0) ? i : a, b = (idx[i] == 1) ? i : b;
 
+    printf("%luns\n", clock() - begin);
     printf("%d\n%d\n", sum, (a + 1) * (b + 1));
 }

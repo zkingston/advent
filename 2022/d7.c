@@ -17,6 +17,7 @@ int main(void)
 {
     const char *f;
     const uint32_t size = load(&f, INPUT_FILENAME);
+    const clock_t begin = clock();
 
     uint32_t i = 0, stack[UINT8_MAX], dirs[UINT8_MAX];
     uint8_t sp = 0, dp = 0;
@@ -72,5 +73,6 @@ int main(void)
         if (dirs[dp] <= SMALL)
             sum += dirs[dp];
 
+    printf("%luns\n", clock() - begin);
     printf("%d\n%d\n", sum, dirs[dp]);
 }

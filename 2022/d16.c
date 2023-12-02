@@ -42,6 +42,7 @@ int main(void)
 {
     const char *f;
     const uint32_t size = load(&f, INPUT_FILENAME);
+    const clock_t begin = clock();
 
     for (uint32_t i = 6; i < size; i += 9)
     {
@@ -85,5 +86,9 @@ int main(void)
             for (uint8_t j = 0; j < nv; ++j)
                 dist[i][j] = MIN(dist[i][j], dist[i][k] + dist[k][j]);
 
-    printf("%d\n%d\n", dp(30, vidx[AA], all_opened, false), dp(26, vidx[AA], all_opened, true));
+    const uint16_t a = dp(30, vidx[AA], all_opened, false);
+    const uint16_t b = dp(26, vidx[AA], all_opened, true);
+
+    printf("%luns\n", clock() - begin);
+    printf("%u\n%u\n", a, b);
 }
