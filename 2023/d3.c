@@ -27,46 +27,34 @@ int main(void)
             gp += is_gear;
         }
 
-    uint32_t total = 0, gear1[1000] = {0}, gear2[1000] = {0};
+    uint32_t total = 0, gi = 0, v = 0, g1[1000] = {0}, g2[1000] = {0};
     for (uint8_t i = 0; i < S; ++i)
-    {
-        uint16_t g = 0, v = 0;
-        for (uint8_t j = 0; j < S; ++j)
+        for (uint8_t j = 0; j < S + 1; ++j)
         {
             const char c = f[i * (S + 1) + j];
             if ('0' <= c && c <= '9')
             {
-                g = MAX(g, active[i][j]);
+                gi = MAX(gi, active[i][j]);
                 v = v * 10 + c - '0';
             }
             else
             {
-                if (g)
+                if (gi)
                 {
                     total += v;
-                    if (!gear1[g])
-                        gear1[g] = v;
+                    if (!g1[gi])
+                        g1[gi] = v;
                     else
-                        gear2[g] = v;
+                        g2[gi] = v;
                 }
 
-                g = v = 0;
+                gi = v = 0;
             }
         }
 
-        if (g)
-        {
-            total += v;
-            if (!gear1[g])
-                gear1[g] = v;
-            else
-                gear2[g] = v;
-        }
-    }
-
     uint32_t gs = 0;
     for (uint16_t i = 2; i < gp; ++i)
-        gs += gear1[i] * gear2[i];
+        gs += g1[i] * g2[i];
 
     printf("%u\n%u\n", total, gs);
 }
