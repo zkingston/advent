@@ -2,11 +2,6 @@
 
 #define N_MAX 3
 
-static inline int cmp(const uint32_t *p1, const uint32_t *p2)
-{
-    return *p2 - *p1;
-}
-
 int main(void)
 {
     const char *f;

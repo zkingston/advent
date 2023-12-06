@@ -2,7 +2,7 @@
 
 #define M 5000
 #define KEY 811589153
-#define SHIFT(a, o, n) memmove((a) + (o), (a), (n) * (sizeof(a)))
+#define SHIFT(a, o, n) memmove((a) + (o), (a), (n) * (sizeof(int64_t)))
 
 static inline int64_t mix(const int64_t file[], uint16_t n, uint8_t times)
 {
@@ -17,10 +17,10 @@ static inline int64_t mix(const int64_t file[], uint16_t n, uint8_t times)
             for (; indices[j] != i && j < n; ++j)
                 ;
 
-            SHIFT(indices + j + 1, -1, n - j);          // pop
-            const int64_t r = (j + file[i]) % (n - 1);  // shift
-            const int64_t k = (r < 0) ? r + (n - 1) : r;
-            SHIFT(indices + k, 1, n - k - 1);  // push
+            SHIFT(indices + j + 1, -1, n - j);            // pop
+            const int64_t r = (j + file[i]) % (n - 1);    // shift
+            const int64_t k = (r < 0) ? r + (n - 1) : r;  //
+            SHIFT(indices + k, 1, n - k - 1);             // push
             indices[k] = i;
         }
 

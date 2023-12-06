@@ -21,6 +21,9 @@ c_args = [
 
 link_args = ['-fsanitize-recover=all']
 
+cc = meson.get_compiler('c')
+m_dep = cc.find_library('m', required : true)
+
 foreach year : [2021, 2022, 2023]
   foreach day : range(26)
     ystr = year.to_string()
@@ -39,6 +42,7 @@ foreach year : [2021, 2022, 2023]
       include_directories: ['include'],
       c_args: c_args + ['-DINPUT_FILENAME="' + input_filename + '"'],
       link_args: link_args,
+      dependencies : m_dep
     )
   endforeach
 endforeach

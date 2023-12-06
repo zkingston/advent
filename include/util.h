@@ -17,6 +17,7 @@
 #include <sys/types.h>
 #include <termios.h>
 #include <unistd.h>
+#include <math.h>
 
 static inline uint32_t load(const char **f, const char *filename)
 {
