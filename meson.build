@@ -24,7 +24,7 @@ link_args = ['-fsanitize-recover=all']
 cc = meson.get_compiler('c')
 m_dep = cc.find_library('m', required : true)
 
-foreach year : [2021, 2022, 2023]
+foreach year : [2021, 2022, 2023, 2025]
   foreach day : range(26)
     ystr = year.to_string()
     dstr = day.to_string()
