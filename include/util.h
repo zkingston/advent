@@ -57,4 +57,57 @@ static inline void set_no_ICANON()
 #define BLUE "\e[0;34m"
 #define CRESET "\e[0m"
 
+static inline uint8_t count_digits(uint64_t n)
+{
+    if (n < 10)
+        return 1;
+    if (n < 100)
+        return 2;
+    if (n < 1000)
+        return 3;
+    if (n < 10000)
+        return 4;
+    if (n < 100000)
+        return 5;
+    if (n < 1000000)
+        return 6;
+    if (n < 10000000)
+        return 7;
+    if (n < 100000000)
+        return 8;
+    if (n < 1000000000)
+        return 9;
+    if (n < 10000000000ULL)
+        return 10;
+    if (n < 100000000000ULL)
+        return 11;
+    if (n < 1000000000000ULL)
+        return 12;
+    if (n < 10000000000000ULL)
+        return 13;
+    if (n < 100000000000000ULL)
+        return 14;
+    if (n < 1000000000000000ULL)
+        return 15;
+    return 16;
+}
+
+static const uint64_t POW10[] = {1,
+                                 10,
+                                 100,
+                                 1000,
+                                 10000,
+                                 100000,
+                                 1000000,
+                                 10000000,
+                                 100000000,
+                                 1000000000,
+                                 10000000000ULL,
+                                 100000000000ULL,
+                                 1000000000000ULL,
+                                 10000000000000ULL,
+                                 100000000000000ULL,
+                                 1000000000000000ULL,
+                                 10000000000000000ULL};
+
 #endif

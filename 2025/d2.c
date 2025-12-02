@@ -14,13 +14,13 @@ int main(void)
         {
             for (uint64_t k = r[0]; k <= r[1]; ++k)
             {
-                uint8_t d = floor(log10(k)) + 1;
+                uint8_t d = count_digits(k);
                 for (uint8_t s = 2; s <= 7; ++s)
                 {
                     if (d % s == 0)
                     {
                         bool y = true;
-                        uint64_t kc = k, m = pow(10, d / s);
+                        uint64_t kc = k, m = POW10[d / s];
                         for (uint8_t w = 0; w < s - 1 && y; ++w)
                         {
                             y &= kc % m == (kc / m) % m;
