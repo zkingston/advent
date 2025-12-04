@@ -1,25 +1,20 @@
 #include "util.h"
-
-/* #define MAX_X 10 */
 #define MAX_X 139
 
 int main(void)
 {
     const char *f;
-    const uint32_t size = load(&f, INPUT_FILENAME);
+    load(&f, INPUT_FILENAME);
     const clock_t begin = clock();
 
     bool a1[MAX_X + 2][MAX_X + 2] = {0}, a2[MAX_X + 2][MAX_X + 2] = {0};
 
     for (int16_t x = 0; x < MAX_X; ++x)
         for (int16_t y = 0; y < MAX_X; ++y)
-        {
-            const char c = f[x * (MAX_X + 1) + y];
-            a1[x + 1][y + 1] = c == '@';
-        }
+            a1[x + 1][y + 1] = f[x * (MAX_X + 1) + y] == '@';
 
     uint32_t total = 0;
-    for (uint16_t k = 0, changed = true; changed; k++)
+    for (bool k = false, changed = true; changed; k = true)
     {
         changed = false;
         for (int16_t x = 0; x < MAX_X; ++x)
