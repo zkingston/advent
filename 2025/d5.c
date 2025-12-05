@@ -1,10 +1,8 @@
 #include "util.h"
 
-int compare(const void *a, const void *b)
+int cmp(const uint64_t *a, const uint64_t *b)
 {
-    const uint64_t *pa = (const uint64_t *)a;
-    const uint64_t *pb = (const uint64_t *)b;
-    return (*pa > *pb) - (*pa < *pb);
+    return (*a > *b) - (*a < *b);
 }
 
 int main(void)
@@ -33,7 +31,7 @@ int main(void)
             r[k][j] = r[k][j] * 10 + c - '0';
     }
 
-    qsort(r, k, sizeof(r[0]), compare);
+    qsort(r, k, sizeof(r[0]), (int (*)(const void *, const void *))cmp);
 
     for (uint64_t j = 0, b = 0; j < k; b = j++)
     {
