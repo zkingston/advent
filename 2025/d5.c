@@ -4,11 +4,7 @@ int compare(const void *a, const void *b)
 {
     const uint64_t *pa = (const uint64_t *)a;
     const uint64_t *pb = (const uint64_t *)b;
-    if (pa[0] < pb[0])
-        return -1;
-    if (pa[0] > pb[0])
-        return 1;
-    return 0;
+    return (*pa > *pb) - (*pa < *pb);
 }
 
 int main(void)
@@ -39,41 +35,27 @@ int main(void)
 
     qsort(r, k, sizeof(r[0]), compare);
 
-    uint64_t rem = 0;
-    for (uint64_t j = 0; j < k; ++j)
+    for (uint64_t j = 0, b = 0; j < k; b = j++)
     {
-        for (uint64_t g = j + 1; g < k; ++g)
-        {
-            if (r[g][0] >= r[j][0] && r[g][0] <= r[j][1])
-            {
-                r[j][1] = MAX(r[j][1], r[g][1]);
-                r[g][0] = r[g][1] = 0;
-                rem++;
-            }
-        }
-    }
+        for (; j < k && r[j][0] >= r[b][0] && r[j][0] <= r[b][1]; ++j)
+            r[b][1] = MAX(r[j][1], r[b][1]);
 
-    for (uint64_t j = 0; j < k; ++j)
-    {
-        if (r[j][1])
-            t2 += r[j][1] - r[j][0] + 1;
+        t2 += r[b][1] - r[b][0] + 1;
     }
 
     uint64_t v = 0;
-    i++;
     for (; i < size; ++i)
     {
         const char c = f[i];
         if (c == '\n')
         {
             for (uint64_t j = 0; j < k; ++j)
-            {
                 if (v >= r[j][0] && v <= r[j][1])
                 {
                     t1++;
                     break;
                 }
-            }
+
             v = 0;
         }
         else
